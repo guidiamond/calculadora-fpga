@@ -57,6 +57,7 @@
 ## tbd
 
 !*.tcl
+*.bak
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
