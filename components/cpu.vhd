@@ -4,10 +4,10 @@ use ieee.std_logic_1164.all;
 entity cpu is
     generic (
                 OPCODE_WIDTH: natural := 4;
-                PALAVRA_CONTROLE_WIDTH: natural := 8;
+                PALAVRA_CONTROLE_WIDTH: natural := 10;
                 DATA_WIDTH  : natural :=  8;
                 ROM_DATA_WIDTH  : natural :=  8;
-                ROM_ADDR_WIDTH  : natural :=  12;
+                ROM_ADDR_WIDTH  : natural :=  12
                     
             );
     port
@@ -15,10 +15,10 @@ entity cpu is
         -- inputs
         clk : in std_logic;
         barDadosEntrada : in std_logic_vector(ROM_DATA_WIDTH-1 downto 0);
-        habLeituraRam, habEscritaRam : in std_logic;
+        habLeituraRam, habEscritaRam : out std_logic;
         -- outputs
         barEnderecos : out std_logic_vector(ROM_ADDR_WIDTH-1 downto 0);
-        barDadosSaida : out std_logic_vector(ROM_DATA_WIDTH-1 downto 0);
+        barDadosSaida : out std_logic_vector(ROM_DATA_WIDTH-1 downto 0)
     );
 end entity;
 
@@ -30,21 +30,21 @@ architecture comportamento of cpu is
     alias habEscrita : std_logic is palavraControle(7);
 
 begin
-    FD: entity.fluxoDados
+    FD: entity work.fluxoDados
         port map (
-                     clk => clk
+                     clk => clk,
                      palavraControle => palavraControle, -- in
                      barDadosEntrada => barDadosEntrada, -- in
                      opCode => opCode, -- out
                      barEnderecos => barEnderecos, -- out
-                     barDadosSaida => barDadosSaida, -- out
+                     barDadosSaida => barDadosSaida -- out
                  );
 
-    UC:  entity work.UnidadeControle
+    UC:  entity work.unidadeControle
         port map (
-                 clk =>  clk
+                 clk =>  clk,
                  opCode => opCode, -- in
-                 palavraControle => palavraControle, -- out
+                 palavraControle => palavraControle -- out
              );
 
     habLeituraRam <= habLeitura;

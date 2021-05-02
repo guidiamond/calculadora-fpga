@@ -2,15 +2,14 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity Unidade_Controle is
+entity unidadeControle is
   generic (
               OPCODE_WIDTH: natural := 4;
-              PALAVRA_CONTROLE_WIDTH: natural := 8;
+              PALAVRA_CONTROLE_WIDTH: natural := 10
   );
   port   (
     -- Input ports
     clk  :  in  std_logic;
-    flagZero: in std_logic;
     opCode  :  in  std_logic_vector(OPCODE_WIDTH-1 downto 0);
     -- Output ports
     palavraControle  :  out std_logic_vector(PALAVRA_CONTROLE_WIDTH-1 downto 0)
@@ -18,7 +17,7 @@ entity Unidade_Controle is
 end entity;
 
 
-architecture arch_name of Unidade_Controle is
+architecture arch_name of unidadeControle is
   signal pontosControle : std_logic_vector(PALAVRA_CONTROLE_WIDTH-1 downto 0);
 
   -- Output alias (mais facil de atribuir os valores)
@@ -42,7 +41,7 @@ architecture arch_name of Unidade_Controle is
   constant SUB   : std_logic_vector := "1000";
 
   begin
-    habJump <= '1' when opCode = JMP or (opCode = JE AND flagZero = '1') else '0';
+    habJump <= '1' when opCode = JMP;
     muxImediatoRam <= '1' when opCode = CMP or opCode = INC or opCode = ADD or opCode = SUB else '0';
 
     habEscritaAcumulador <= '1' when opCode = LOAD or opCode = INC or opCode = ADD or opCode = SUB;
@@ -54,8 +53,8 @@ architecture arch_name of Unidade_Controle is
                    "100" when opCode = JE else
                    "000";
 
-    habLeituraRam <= "1" when opCode = LOAD else '0';
-    habEscritRam  <= "1" when opCode = STORE else '0';
+    habLeituraRam <= '1' when opCode = LOAD else '0';
+    habEscritRam  <= '1' when opCode = STORE else '0';
 
     -- Assign resultado final para output
     palavraControle <= pontosControle;

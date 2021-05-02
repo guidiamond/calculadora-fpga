@@ -15,12 +15,11 @@ entity Calculadora is
 		  SW       : in std_logic_vector(9 downto 0);
 		  KEY      : in std_logic_vector(3 downto 0);
 		  -- Output ports
-		  HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : out std_logic_vector(6 downto 0);
+		  HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : out std_logic_vector(6 downto 0)
     );
   end entity;
   
 architecture arch_name of Calculadora is
-
   -- Perifericos
   signal habSW : std_logic_vector(9 downto 0);
   signal habKey : std_logic_vector(3 downto 0);
@@ -43,7 +42,7 @@ begin
       saida    => barDadosEntrada,
       habilita => habKey
   );
-
+  
   interfaceSwitches : entity work.interfaceSwitches
     port map(
       entrada  => SW,
@@ -53,7 +52,7 @@ begin
 
   interfaceDisplays : entity work.interfaceDisplays
     port map(
-      entrada => barSaidaDados,
+      entrada => barDadosSaida(3 downto 0),
       habilita => habDisplay,
       clk    => Clk,
       H0     => HEX0,
@@ -67,8 +66,8 @@ begin
   CPU : entity work.cpu
     port map(
       clk => Clk,
-      barEnderecos => barEnderecos
-      barDadosEntrada => barDadosEntrada
+      barEnderecos => barEnderecos,
+      barDadosEntrada => barDadosEntrada,
       barDadosSaida => barDadosSaida,
       habLeituraRam => habLeituraRam,
       habEscritaRam => habEscritaRam

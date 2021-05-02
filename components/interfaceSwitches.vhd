@@ -3,12 +3,12 @@ use ieee.std_logic_1164.all;
 
 entity interfaceSwitches is
   generic (
-    dataWidth : NATURAL := 8
+    dataWidth : NATURAL := 10
   );
   port (
     entrada  : in std_logic_vector(dataWidth - 1 downto 0);
     habilita : in std_logic_vector(dataWidth - 1 downto 0);
-    saida    : out std_logic_vector(dataWidth - 1 downto 0)
+    saida    : out std_logic_vector(7 downto 0)
   );
 end entity;
 
@@ -22,5 +22,7 @@ begin
     "0000000" & entrada(5) when habilita(5) = '1' else
     "0000000" & entrada(6) when habilita(6) = '1' else
     "0000000" & entrada(7) when habilita(7) = '1' else
+    "0000000" & entrada(8) when habilita(8) = '1' else
+    "0000000" & entrada(9) when habilita(9) = '1' else
     (others => 'Z');
 end architecture;

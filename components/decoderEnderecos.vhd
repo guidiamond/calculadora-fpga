@@ -5,17 +5,17 @@ use ieee.numeric_std.all;
 entity decoderEnderecos is
   generic (
     DATA_WIDTH : NATURAL := 8;
-    ADDR_WIDTH : NATURAL := 8
+    ADDR_WIDTH : NATURAL := 12
   );
 
   port (
     -- Input ports
-    dataIn : in std_logic_vector(15 downto 0);
+    dataIn : in std_logic_vector(ADDR_WIDTH-1 downto 0);
     -- Output ports
     habDisplay    : out std_logic_vector(5 downto 0);
-    habSW     : out std_logic_vector(7 downto 0);
+    habSW     : out std_logic_vector(9 downto 0);
     habKey    : out std_logic_vector(3 downto 0);
-    habRam    : out std_logic;
+    habRam    : out std_logic
   );
 end entity;
 architecture arch_name of decoderEnderecos is
@@ -64,7 +64,7 @@ begin
   '0';
   habDisplay(5) <= '1' when (dataIn = x"0013") else -- Overflow
   '0';
-  habRam <= 1 when (dataIn = x"0014" )
+  habRam <= '1' when (dataIn = x"0014");
   
 end architecture;
 

@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity memoriaRAM is
    generic (
          dataWidth: natural := 8;
-         addrWidth: natural := 8
+         addrWidth: natural := 12
     );
     port
     (
