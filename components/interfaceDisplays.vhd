@@ -4,12 +4,13 @@ use ieee.numeric_std.all;
 
 entity interfaceDisplays is
   generic (
-    DATA_WIDTH : NATURAL := 4
+    DATA_WIDTH : NATURAL := 4;
+    HEX_SIZE: NATURAL := 6
   );
 
   port (
     entrada  : in std_logic_vector(DATA_WIDTH - 1 downto 0);
-    habilita  : in std_logic_vector(5 downto 0);
+    habilita  : in std_logic_vector(HEX_SIZE-1 downto 0);
     clk : in std_logic;
     H0, H1, H2, H3, H4, H5 : out STD_LOGIC_VECTOR(6 downto 0)
   );

@@ -75,7 +75,7 @@ begin
 
   RAM: entity work.memoriaRAM generic map (dataWidth => DATA_WIDTH, addrWidth => 10)
     port map (
-        addr     => barEnderecos,
+        addr     => barEnderecos(9 downto 0),
         we       => habLeituraRam,
         re       => habEscritaRam,
         habilita => habRam,
