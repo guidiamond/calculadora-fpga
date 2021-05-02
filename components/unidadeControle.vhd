@@ -21,13 +21,13 @@ architecture arch_name of unidadeControle is
   signal pontosControle : std_logic_vector(PALAVRA_CONTROLE_WIDTH-1 downto 0);
 
   -- Output alias (mais facil de atribuir os valores)
-  alias habJump : std_logic is palavraControle(0);
-  alias habEscritaAcumulador : std_logic is palavraControle(1);
-  alias selOperacaoULA : std_logic_vector(2 downto 0) is palavraControle(4 downto 2);
-  alias muxImediatoRam : std_logic is palavraControle(5);
-  alias habLeituraRam : std_logic is palavraControle(6);
-  alias habEscritRam : std_logic is palavraControle(7);
-  alias habJE : std_logic is palavraControle(8);
+  alias habJump : std_logic is pontosControle(0);
+  alias habEscritaAcumulador : std_logic is pontosControle(1);
+  alias selOperacaoULA : std_logic_vector(2 downto 0) is pontosControle(4 downto 2);
+  alias muxImediatoRam : std_logic is pontosControle(5);
+  alias habLeituraRam : std_logic is pontosControle(6);
+  alias habEscritRam : std_logic is pontosControle(7);
+  alias habJE : std_logic is pontosControle(8);
 
   -- INSTRUCTIONS
   constant STORE : std_logic_vector := "0000";
