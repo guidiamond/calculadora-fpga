@@ -73,7 +73,7 @@ begin
       habEscritaRam => habEscritaRam
   );
 
-  RAM: entity work.memoriaRAM
+  RAM: entity work.memoriaRAM generic map (dataWidth => DATA_WIDTH, addrWidth => 10)
     port map (
         addr     => barEnderecos,
         we       => habLeituraRam,
