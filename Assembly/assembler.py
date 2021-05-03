@@ -129,6 +129,10 @@ def main(raw_assembly: List[str]):
         "JL",
         "ADD",
         "SUB",
+        "AND",
+        "OR",
+        "NOT",
+        "XOR",
     ]
     jump_instructions = ["JE", "JMP", "JL"]
     Assembler(raw_assembly, lista_opcodes, jump_instructions).parse()
